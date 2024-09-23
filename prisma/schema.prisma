@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo de Usuario (User)
+// Este modelo gestionará a los usuarios registrados, quienes podrán comprar o vender recursos.
+model User {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  password     String // Encriptada
+  role         Role          @default(USER) // Admin, Vendedor, Usuario
+  resources    Resource[]
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+  SELLER
+}
+
+// Modelo de Recurso (Resource)
+// Cada recurso (plantilla, gráfico, plugin, etc.) será subido por un usuario (vendedor). Este modelo almacenará detalles sobre los recursos.
+model Resource {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String
+  price       Float
+  type        ResourceType
+  author      User         @relation(fields: [authorId], references: [id])
+  authorId    Int
+  fileUrl     String // URL al archivo almacenado (en AWS S3, por ejemplo)
+  category    Category     @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  Transaction Transaction[]
+}
+
+enum ResourceType {
+  TEMPLATE
+  GRAPHIC
+  AUDIO
+  VIDEO
+  PLUGIN
+}
+
+// Modelo de Categoría (Category)
+// Este modelo categorizará los recursos para facilitar la búsqueda y organización.
+model Category {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  resources Resource[]
+}
+
+// Modelo de Transacción (Transaction)
+// Este modelo gestionará la compra de recursos y permitirá llevar un historial de transacciones.
+model Transaction {
+  id            Int           @id @default(autoincrement())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        Int
+  resource      Resource      @relation(fields: [resourceId], references: [id])
+  resourceId    Int
+  amount        Float
+  paymentStatus PaymentStatus
+  createdAt     DateTime      @default(now())
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
