@@ -19,6 +19,9 @@ export default function SignIn() {
     // };
 
     return (
+        <div className="login">
+            <SignInScreen />
+        </div>
         // <div className="max-w-md mx-auto py-6">
         //     <h2 className="text-3xl font-bold mb-6">Iniciar Sesión</h2>
         //     <form onSubmit={handleSubmit}>
@@ -39,6 +42,5 @@ export default function SignIn() {
         //         <button type="submit" className="block w-full bg-blue-500 text-white py-2">Ingresar</button>
         //     </form>
         // </div>
-        <SignInScreen />
     )
 }

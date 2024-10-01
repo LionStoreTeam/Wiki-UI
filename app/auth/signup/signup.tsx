@@ -3,14 +3,14 @@ import { BsGithub } from "react-icons/bs";
 import { CiMail } from "react-icons/ci";
 
 
-const SignInScreen = () => {
+const SignUpScreen = () => {
     return (
         <section className="w-full bg-transparent md:bg-transparent">
             <div className="h-[calc(100vh-2rem)] flex justify-center items-center">
                 <div className="p-5  h-[calc(100vh)] w-full flex flex-col justify-center items-center bg-white rounded-lg md:h-min md:bg-slate-100 md:ml-20 md:mr-20 md:mb-20">
                     <div className="text-center">
                         {/* Title */}
-                        <h1 className="text-[30px] font-semibold">Log In</h1>
+                        <h1 className="text-[30px] font-semibold">Create your free account</h1>
                         {/* Login with Google or Github */}
                         <div className="flex justify-center gap-4 items-center">
                             <div className="flex p-3 border-2 border-slate-300 rounded-md">
@@ -51,5 +51,5 @@ const SignInScreen = () => {
     );
 }
 
-export default SignInScreen;
+export default SignUpScreen;
 
