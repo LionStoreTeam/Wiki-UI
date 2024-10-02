@@ -5,8 +5,8 @@ import { TypeAnimation } from "react-type-animation";
 
 const Welcome = () => {
     return (
-        <div className="welcome w-full px-10 flex flex-col text-center justify-center items-center">
-            <h1 className={"text-slate-200 text-4xl sm:text-5xl lg:text-6xl lg:leading-normal font-semibold"}>
+        <div className="welcome w-full px-10 pt-10 flex flex-col text-center justify-center items-center">
+            <h1 className="text-slate-200 text-4xl sm:text-5xl lg:text-6xl lg:leading-normal font-semibold">
                 <p className="text-pink-100 border-b-2 border-pink-500">
                     <span className={geologica.className}>
                         <TypeAnimation

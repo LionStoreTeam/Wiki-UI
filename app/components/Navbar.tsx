@@ -5,6 +5,12 @@ import Link from "next/link";
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { FaRegUser } from "react-icons/fa";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 
 
 const Navbar = () => {
@@ -18,12 +24,33 @@ const Navbar = () => {
 
     // Array containing navigation items
     const navItems = [
-        { id: 1, text: 'Home' },
-        { id: 2, text: 'Company' },
-        { id: 3, text: 'Resources' },
-        { id: 4, text: 'About' },
-        { id: 5, text: 'Contact' },
+        {
+            id: 1,
+            text: 'Home',
+            content: "Content 1",
+        },
+        {
+            id: 2,
+            text: 'Company',
+            content: "Content 2",
+        },
+        {
+            id: 3,
+            text: 'Resources',
+            content: "Content 3",
+        },
+        {
+            id: 4,
+            text: 'About',
+            content: "Content 4",
+        },
+        {
+            id: 5,
+            text: 'Contact',
+            content: "Content 5",
+        },
     ];
+
 
     return (
         <div className='welcome w-full flex justify-between items-center bg-white h-[4rem] px-4'>
@@ -75,9 +102,16 @@ const Navbar = () => {
                 {navItems.map(item => (
                     <li
                         key={item.id}
-                        className='p-4 border-b  hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600'
+                        className='p-4 rounded-xl cursor-pointer hover:bg-pink-100 transition-all ease-linear duration-200'
                     >
-                        {item.text}
+                        <Accordion type="single" collapsible className="w-full">
+                            <AccordionItem value="item-1">
+                                <AccordionTrigger className="text-pink-900">{item.text}</AccordionTrigger>
+                                <AccordionContent>
+                                    {item.content}
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
                     </li>
                 ))}
             </ul>
